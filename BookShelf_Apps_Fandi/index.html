@@ -18,60 +18,61 @@
     <div class="wrapper">
         <div class="container bg-white shadow" id="add-book">
             <h2 class="container-header text-center">Tambah Buku Baru!</h2>
-            <form class="form" action="#" id="formBuku">
+            <form class="form" action="#" id="formBuku" data-testid="bookForm">
 
                 <div class="form-group form-title">
                     <label for="title">Judul Buku</label>
-                    <input type="text" id="titleBook" name="title" placeholder="Input Here" required>
+                    <input type="text" id="titleBook" name="title" placeholder="Input Here" required data-testid="bookFormTitleInput">
                 </div>
 
                 <div class="form-group form-title">
                     <label for="penulis">Nama Penulis</label>
-                    <input type="text" id="authorBook" name="penulis" placeholder="Input Here">
+                    <input type="text" id="authorBook" name="penulis" placeholder="Input Here" data-testid="bookFormAuthorInput">
                 </div>
 
                 <div class="form-group form-title">
                     <label for="tahun">Tahun Terbit</label>
-                    <input type="number" id="yearsBook" name="tahun" placeholder="Input Here">
+                    <input type="number" id="yearsBook" name="tahun" placeholder="Input Here" data-testid="bookFormYearInput">
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" name="isRead" id="isCompleted" placeholder="">
+                    <input type="checkbox" name="isRead" id="isCompleted" placeholder="" data-testid="bookFormIsCompleteCheckbox">
                     <label for="isRead">Selesai Dibaca</label>
                 </div>
 
-                <input type="submit" value="Simpan" name="Submit" class="submitButton">
+                <input type="submit" value="Simpan" name="Submit" class="submitButton" data-testid="bookFormSubmitButton">
 
             </form>
         </div>
 
         <div class="container shadow">
             <h2 class="title">Cari Buku</h2>
-            <form id="formSearch" action="" method="post">
+            <form id="formSearch" action="" method="post" data-testid="searchBookForm">
                 <div class="form-group">
-                    <input type="text" name="pencarian" id="pencarian" placeholder="Search Here">
+                    <input type="text" name="pencarian" id="pencarian" placeholder="Search Here" data-testid="searchBookFormTitleInput">
                 </div>
                 <div class="form-search-buttom">
-                    <button type="submit" class="searchButton"><i class='bx bx-search-alt-2'></i></button>
+                    <button type="submit" class="searchButton" data-testid="searchBookFormSubmitButton"><i class='bx bx-search-alt-2'></i></button>
                 </div>
             </form>
         </div>
 
         <div class="container shadow">
             <h2 class="container-header">Belum Selesai Dibaca</h2>
-            <div class="list-item" id="unComplete">
+            <div class="list-item" id="unComplete" data-testid="incompleteBookList">
             </div>
         </div>
 
         <div class="container shadow">
             <h2 class="container-header">Sudah Selesai Dibaca</h2>
-            <div class="list-item" id="isComplete">
+            <div class="list-item" id="isComplete" data-testid="completeBookList">
             </div>
         </div>
     </div>
 
     <script src="js/storage.js"></script>
-    <script src="js/script.js""></script>
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
