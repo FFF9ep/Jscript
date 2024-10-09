@@ -14,13 +14,19 @@ function addBook(){
         status = false;
     }
 
-    books.push({id: +new Date(), title: titleBook, author: authorBook, year: Number(yearsBook), isCompleted: status,});
+    books.push({
+        id: +new Date(),
+        title: titleBook,
+        author: authorBook,
+        year: Number(yearsBook),
+        isCompleted: status,
+    });
 
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
-};
+}
 
-document.addEventListener(RENDER_EVENT, function(){
+document.addEventListener(RENDER_EVENT, function() {
     console.log(books);
     const unCompleted = document.getElementById("unComplete");
     unCompleted.innerHTML = "";
@@ -28,17 +34,17 @@ document.addEventListener(RENDER_EVENT, function(){
     const isCompleted = document.getElementById("isComplete");
     isCompleted.innerHTML = "";
 
-    for(const bookItem of books){
+    for (const bookItem of books) {
         const bookElement = makeBook(bookItem);
-        if(!bookItem.isCompleted){
-        unCompleted.append(bookElement);
-        }else{
-        isCompleted.append(bookElement);
+        if (!bookItem.isCompleted) {
+            unCompleted.append(bookElement);
+        } else {
+            isCompleted.append(bookElement);
         }
     }
 });
 
-function makeBook (objectBook){
+function makeBook(objectBook) {
     const textTitle = document.createElement("p");
     textTitle.classList.add("itemTitle");
     textTitle.innerHTML = `${objectBook.title} - ${objectBook.year}`;
@@ -59,49 +65,49 @@ function makeBook (objectBook){
     container.append(textContainer);
     container.setAttribute("id", `book-${objectBook.id}`);
 
-    if(objectBook.isCompleted){
+    if (objectBook.isCompleted) {
         const undoButton = document.createElement("button");
         undoButton.classList.add("undoButton");
         undoButton.innerHTML = `<i class='bx bx-undo'></i>`;
 
-        undoButton.addEventListener("click", function(){
-        undoBookFromCompleted(objectBook.id);
+        undoButton.addEventListener("click", function() {
+            undoBookFromCompleted(objectBook.id);
         });
 
         const trashButton = document.createElement("button");
         trashButton.classList.add("trashButton");
         trashButton.innerHTML = `<i class='bx bx-trash'></i>`;
 
-        trashButton.addEventListener("click", function (){
-        removeBookFromCompleted(objectBook.id);
+        trashButton.addEventListener("click", function() {
+            removeBookFromCompleted(objectBook.id);
         });
 
         actionContainer.append(undoButton, trashButton);
         container.append(actionContainer);
-    }else{ 
+    } else {
         const checkButton = document.createElement("button");
         checkButton.classList.add("checkButton");
         checkButton.innerHTML = `<i class='bx bx-check'></i>`;
 
-        checkButton.addEventListener("click", function(){
-        addBookToCompleted(objectBook.id);
+        checkButton.addEventListener("click", function() {
+            addBookToCompleted(objectBook.id);
         });
 
         const trashButton = document.createElement("button");
         trashButton.classList.add("trashButton");
         trashButton.innerHTML = `<i class='bx bx-trash'></i>`;
 
-        trashButton.addEventListener("click", function(){
-        removeBookFromCompleted(objectBook.id);
+        trashButton.addEventListener("click", function() {
+            removeBookFromCompleted(objectBook.id);
         });
 
         actionContainer.append(checkButton, trashButton);
         container.append(actionContainer);
-    };
+    }
     return container;
-};
+}
 
-function addBookToCompleted(bookId){
+function addBookToCompleted(bookId) {
     const bookTarget = findBook(bookId);
 
     if (bookTarget == null) return;
@@ -109,29 +115,29 @@ function addBookToCompleted(bookId){
     bookTarget.isCompleted = true;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
-};
+}
 
-function findBook(bookId){
+function findBook(bookId) {
     for (const bookItem of books) {
         if (bookItem.id === bookId) {
-        return bookItem;
+            return bookItem;
         }
     }
 
     return null;
-};
+}
 
-function removeBookFromCompleted(bookId){
+function removeBookFromCompleted(bookId) {
     const bookTarget = findBookIndex(bookId);
 
-    if(bookTarget === -1) return;
-    
+    if (bookTarget === -1) return;
+
     books.splice(bookTarget, 1);
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
-};
+}
 
-function undoBookFromCompleted(bookId){
+function undoBookFromCompleted(bookId) {
     const bookTarget = findBook(bookId);
 
     if (bookTarget == null) return;
@@ -139,19 +145,18 @@ function undoBookFromCompleted(bookId){
     bookTarget.isCompleted = false;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
-};
+}
 
-function findBookIndex(bookId){
-    for(const index in books){
-        if(books[index].id === bookId){
-        return index;
+function findBookIndex(bookId) {
+    for (const index in books) {
+        if (books[index].id === bookId) {
+            return index;
         }
     }
     return -1;
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-    
+document.addEventListener("DOMContentLoaded", function() {
     const saveForm = document.getElementById("formBuku");
     saveForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -170,13 +175,15 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 function searchBook() {
-    const searchInput = document.getElementById("pencarian").value;
-    const moveBook = document.querySelectorAll(".itemTitle");
+    const searchInput = document.getElementById("pencarian").value.toLowerCase();
+    const bookItems = document.querySelectorAll(".item");
 
-    for(const move of moveBook){
-        if(searchInput !== move.innerText){
-            console.log(move.innerText)
-            move.parentElement.remove();
+    for (const item of bookItems) {
+        const title = item.querySelector(".itemTitle").innerText.toLowerCase();
+        if (title.includes(searchInput)) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
         }
     }
-};
+}
