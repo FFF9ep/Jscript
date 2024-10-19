@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Manajemen Pengeluaran</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Aplikasi Manajemen Pengeluaran</h1>
+        
+        <div class="balance">
+            <h2>Saldo: <span id="balance">$0.00</span></h2>
+        </div>
+        
+        <div class="inc-exp-container">
+            <div>
+                <h3>Pemasukan</h3>
+                <p id="income" class="money plus">+$0.00</p>
+            </div>
+            <div>
+                <h3>Pengeluaran</h3>
+                <p id="expense" class="money minus">-$0.00</p>
+            </div>
+        </div>
+
+        <h3>Tambah Transaksi</h3>
+        <form id="form">
+            <div class="form-control">
+                <label for="text">Keterangan</label>
+                <input type="text" id="text" placeholder="Masukkan keterangan...">
+            </div>
+            <div class="form-control">
+                <label for="amount">Jumlah <br> (negatif = pengeluaran, positif = pemasukan)</label>
+                <input type="number" id="amount" placeholder="Masukkan jumlah...">
+            </div>
+            <button class="btn">Tambah Transaksi</button>
+        </form>
+
+        <h3>Riwayat Transaksi</h3>
+        <ul id="list" class="list"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
