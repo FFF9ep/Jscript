@@ -1,0 +1,11 @@
+{
+  "name": "append-text",
+  "version": "1.0.0",
+  "description": "- React Version: 18.2.0\r - Node Version: v18 (LTS)\r - Default Port: 8000",
+  "main": "accountTransaction.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
